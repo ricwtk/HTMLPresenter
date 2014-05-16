@@ -1,0 +1,16 @@
+.header, .content, .footer {
+  display: block;
+  width: 100%;
+}
+
+.header {
+  height: 20%;
+}
+
+.content {
+  height: 70%;
+}
+
+.footer {
+  height: 10%;
+}

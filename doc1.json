@@ -1,0 +1,29 @@
+[
+{
+  "id": 
+    1,
+  "header": 
+    "Title",
+  "content": 
+    "This is the html content",
+  "footer": 
+    "Your credits can go here",
+  "note": 
+    "This is the presenting note",
+  "background": 
+    ""
+  },{
+  "id": 
+    2,
+  "header": 
+    "Title2",
+  "content": 
+    "This is the html content for slide 2",
+  "footer": 
+    "Your credits can go here",
+  "note": 
+    "This is the presenting note for slide 2",
+  "background": 
+    ""
+}
+]
