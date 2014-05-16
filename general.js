@@ -10,6 +10,7 @@ function createSlideDiv(json, divLoc) {
   var div = document.createElement('div');
   div.id = json.id;
   div.className = divLoc;
+  div.style.background = (json.background == '') ? 'rgb(255,255,255)' : json.background;
   var header = document.createElement('div');
   header.className = 'header';
   header.innerHTML = json.header;

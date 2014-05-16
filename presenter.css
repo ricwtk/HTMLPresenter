@@ -76,5 +76,14 @@ html {
   white-space: nowrap;
   margin: 0;
   padding: 0;
+  vertical-align: middle;
 }
 
+.slideCarousel {
+  display: inline-block;
+  position: relative;
+  top: 5%;
+  height: 90%;
+  width: auto;
+  margin: 0 1%;
+}
