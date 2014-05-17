@@ -17,6 +17,15 @@ html {
   vertical-align: middle;
 }
 
+#slideContainer {
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 #prev, #next {
   position: absolute;
   display: block;
@@ -76,7 +85,6 @@ html {
   white-space: nowrap;
   margin: 0;
   padding: 0;
-  vertical-align: middle;
 }
 
 .slideCarousel {
@@ -84,6 +92,11 @@ html {
   position: relative;
   top: 5%;
   height: 90%;
-  width: auto;
   margin: 0 1%;
+}
+
+.slideMain {
+  display: block;
+  position: absolute;
+  top: 0;
 }
