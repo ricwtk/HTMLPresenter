@@ -5,6 +5,8 @@ function initialise() {
   document.getElementById('toggleCar').addEventListener('click', toggleCarousel);
   setUIpos();
   loadSlide();
+  document.getElementById('prev').addEventListener('click', function(e) {goToSlide(-1);});
+  document.getElementById('next').addEventListener('click', function(e) {goToSlide(+1);});
 }
 
 function setUIpos() {
@@ -25,11 +27,22 @@ function loadSlide() {
   for (var i = 0; i < json.length; i++) {
     var divMain = createSlideDiv(json[i], 'slideMain');
     divMain.id = i;
+    divMain.style.display = (i == 0) ? 'block' : 'none';
     var divCarousel = createSlideDiv(json[i], 'slideCarousel');
     divCarousel.id = i;
     divCarousel.addEventListener('click', switchToSlide);
     document.getElementById('slideContainer').appendChild(divMain);
     document.getElementById('carousel').appendChild(divCarousel);
+  }
+}
+
+function goToSlide(inc) {
+  var allSlide = document.getElementsByClassName('slideMain');
+  for (var i = 0; i < allSlide.length; i++) {
+    if (allSlide[i].style.display !== 'none') {
+      allSlide[i].style.display = 'none';
+      allSlide[Math.min(allSlide.length-1, Math.max(0, i+inc))].style.display = 'block';
+    }
   }
 }
 
