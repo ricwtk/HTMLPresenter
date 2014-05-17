@@ -11,7 +11,8 @@ function setUIpos() {
   document.getElementById('toggleCar').style.fontSize = document.getElementById('toggleCar').offsetHeight*0.7 + 'px';
   document.getElementById('config').style.fontSize = document.getElementById('config').offsetHeight*0.7 + 'px';
   addCSSRules(['.slideCarousel {width:' + document.getElementById('carousel').offsetHeight*0.9 *4/3 + 'px}']);
-  
+  var size = fitSlideToParent(document.getElementById('slideContainer'));
+  addCSSRules(['.slideMain {width:' + size.width + 'px; height:' + size.height + 'px}']);
 }
 
 function loadSlide() {
