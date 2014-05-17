@@ -41,7 +41,9 @@ function goToSlide(inc) {
   for (var i = 0; i < allSlide.length; i++) {
     if (allSlide[i].style.display !== 'none') {
       allSlide[i].style.display = 'none';
-      allSlide[Math.min(allSlide.length-1, Math.max(0, i+inc))].style.display = 'block';
+      var slideNow = Math.min(allSlide.length-1, Math.max(0, i+inc));
+      allSlide[slideNow].style.display = 'block';
+      scrollToSlide(slideNow);
     }
   }
 }
@@ -88,4 +90,10 @@ function fitSlideToParent(parent) {
       left: 0.5*(parent.offsetWidth - parent.offsetHeight*4/3)
     }
   }
+}
+
+function scrollToSlide(id) {
+  var carousel = document.getElementById('carousel');
+  var allSlideCarousel = document.getElementsByClassName('slideCarousel');
+  carousel.scrollLeft = allSlideCarousel[id].offsetLeft;
 }
