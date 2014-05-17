@@ -12,7 +12,12 @@ function setUIpos() {
   document.getElementById('config').style.fontSize = document.getElementById('config').offsetHeight*0.7 + 'px';
   addCSSRules(['.slideCarousel {width:' + document.getElementById('carousel').offsetHeight*0.9 *4/3 + 'px}']);
   var size = fitSlideToParent(document.getElementById('slideContainer'));
-  addCSSRules(['.slideMain {width:' + size.width + 'px; height:' + size.height + 'px}']);
+  addCSSRules(['.slideMain {\
+                  width:' + size.width + 'px; \
+                  height:' + size.height + 'px; \
+                  top:' + size.top + 'px; \
+                  left:' + size.left + 'px \
+                  }']);
 }
 
 function loadSlide() {
@@ -58,12 +63,16 @@ function fitSlideToParent(parent) {
   if (parent.offsetHeight*4/3 > parent.offsetWidth) {
     return {
       height: parent.offsetWidth*3/4,
-      width: parent.offsetWidth
+      width: parent.offsetWidth,
+      top: 0.5*(parent.offsetHeight - parent.offsetWidth*3/4),
+      left: 0
     }
   } else {
     return {
       height: parent.offsetHeight,
-      width: parent.offsetHeight*4/3
+      width: parent.offsetHeight*4/3,
+      top: 0,
+      left: 0.5*(parent.offsetWidth - parent.offsetHeight*4/3)
     }
   }
 }
