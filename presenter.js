@@ -7,6 +7,10 @@ function initialise() {
   loadSlide();
   document.getElementById('prev').addEventListener('click', function(e) {goToSlide(-1);});
   document.getElementById('next').addEventListener('click', function(e) {goToSlide(+1);});
+  var allSlide = document.getElementsByClassName('slideMain');
+  for (var i = 0; i < allSlide.length; i++) {
+    console.log(i,allSlide[i].style.display);
+  }
 }
 
 function setUIpos() {
@@ -39,11 +43,13 @@ function loadSlide() {
 function goToSlide(inc) {
   var allSlide = document.getElementsByClassName('slideMain');
   for (var i = 0; i < allSlide.length; i++) {
+    console.log(i, allSlide[i].style.display);
     if (allSlide[i].style.display !== 'none') {
       allSlide[i].style.display = 'none';
       var slideNow = Math.min(allSlide.length-1, Math.max(0, i+inc));
       allSlide[slideNow].style.display = 'block';
       scrollToSlide(slideNow);
+      break;
     }
   }
 }
