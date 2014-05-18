@@ -33,11 +33,11 @@ function loadSlide() {
     divCarouselCover.style.position = 'absolute';
     divCarouselCover.style.width = '100%';
     divCarouselCover.style.height = '100%';
-    divCarouselCover.style.boxShadow = (i == 0) ? slideShadow(1) : slideShadow(0);
     divCarouselCover.style.left = '0';
     divCarouselCover.style.top = '0';
     divCarouselCover.style.background = 'rgba(255,255,255,0)';
     divCarousel.appendChild(divCarouselCover);
+    divCarousel.style.boxShadow = (i == 0) ? slideShadow(1) : slideShadow(0);
     divCarousel.id = i;
     divCarousel.addEventListener('click', switchToSlide);
     document.getElementById('slideContainer').appendChild(divMain);
