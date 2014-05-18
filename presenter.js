@@ -29,6 +29,14 @@ function loadSlide() {
     divMain.id = i;
     divMain.style.display = (i == 0) ? 'block' : 'none';
     var divCarousel = createSlideDiv(json[i], 'slideCarousel');
+    var divCarouselCover = document.createElement('div');
+    divCarouselCover.style.position = 'absolute';
+    divCarouselCover.style.width = '100%';
+    divCarouselCover.style.height = '100%';
+    divCarouselCover.style.left = '0';
+    divCarouselCover.style.top = '0';
+    divCarouselCover.style.background = 'rgba(255,255,255,0)';
+    divCarousel.appendChild(divCarouselCover);
     divCarousel.id = i;
     divCarousel.addEventListener('click', switchToSlide);
     document.getElementById('slideContainer').appendChild(divMain);
