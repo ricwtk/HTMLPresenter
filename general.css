@@ -16,3 +16,11 @@
 .footer {
   height: 10%;
 }
+
+#configContainer:before {
+  content: ' ';
+  display: inline-block;
+  height: 100%;
+  width: 0;
+  vertical-align: middle;
+}

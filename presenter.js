@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', initialise);
 
 function initialise() {
+  createConfig();
+  document.getElementById('config').addEventListener('click', showConfig);
   window.addEventListener('resize', setUIpos);
   document.getElementById('toggleCar').addEventListener('click', toggleCarousel);
   setUIpos();
@@ -20,6 +22,7 @@ function setUIpos() {
                   top:' + size.top + 'px; \
                   left:' + size.left + 'px \
                   }']);
+  setConfigUI();
 }
 
 function loadSlide() {
@@ -28,6 +31,7 @@ function loadSlide() {
     var divMain = createSlideDiv(json[i], 'slideMain');
     divMain.id = i;
     divMain.style.display = (i == 0) ? 'block' : 'none';
+    divMain.style.transform = 'scale(1)';
     var divCarousel = createSlideDiv(json[i], 'slideCarousel');
     var divCarouselCover = document.createElement('div');
     divCarouselCover.style.position = 'absolute';
