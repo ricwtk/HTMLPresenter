@@ -65,6 +65,7 @@ function switchToSlide(e) {
   for (var i = 0; i < allSlide.length; i++) {
     allSlide[i].style.display = (i == this.id) ? 'block' : 'none';
   }
+  scrollToSlide(this.id);
 }
 
 function addCSSRules(rules) {
