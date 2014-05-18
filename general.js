@@ -1,3 +1,7 @@
+function slideShadow(opac) {
+  return '0 0 10px rgba(255, 100, 100, ' + opac + ')';
+}
+
 function getJSON(theUrl) {
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open("GET", theUrl, false);

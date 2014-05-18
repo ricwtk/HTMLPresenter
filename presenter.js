@@ -33,6 +33,7 @@ function loadSlide() {
     divCarouselCover.style.position = 'absolute';
     divCarouselCover.style.width = '100%';
     divCarouselCover.style.height = '100%';
+    divCarouselCover.style.boxShadow = (i == 0) ? slideShadow(1) : slideShadow(0);
     divCarouselCover.style.left = '0';
     divCarouselCover.style.top = '0';
     divCarouselCover.style.background = 'rgba(255,255,255,0)';
@@ -107,4 +108,7 @@ function scrollToSlide(id) {
   var allSlideCarousel = document.getElementsByClassName('slideCarousel');
   var slideMargin = parseFloat(window.getComputedStyle(allSlideCarousel[id]).marginLeft);
   carousel.scrollLeft = allSlideCarousel[id].offsetLeft - slideMargin;
+  for (var i = 0; i < allSlideCarousel.length; i++) {
+    allSlideCarousel[i].style.boxShadow = (i == id) ? slideShadow(1) : slideShadow(0);
+  }
 }
