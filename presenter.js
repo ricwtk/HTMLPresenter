@@ -1,27 +1,43 @@
 document.addEventListener('DOMContentLoaded', initialise);
 
+var uiStyle = document.createElement('style');
+document.head.appendChild(uiStyle);
+
 function initialise() {
   createConfig();
   document.getElementById('config').addEventListener('click', showConfig);
-  window.addEventListener('resize', setUIpos);
+  window.addEventListener('resize', function(){setUIpos();});
   document.getElementById('toggleCar').addEventListener('click', toggleCarousel);
-  setUIpos();
-  loadSlide();
   document.getElementById('prev').addEventListener('click', function(e) {goToSlide(-1);});
   document.getElementById('next').addEventListener('click', function(e) {goToSlide(+1);});
+  loadSlide();
+  setUIpos();
+  setUIpos();
 }
 
 function setUIpos() {
   document.getElementById('toggleCar').style.fontSize = document.getElementById('toggleCar').offsetHeight*0.7 + 'px';
   document.getElementById('config').style.fontSize = document.getElementById('config').offsetHeight*0.7 + 'px';
-  addCSSRules(['.slideCarousel {width:' + document.getElementById('carousel').offsetHeight*0.9 *4/3 + 'px}']);
+  var slideCarouselScale = (document.getElementsByClassName('slideCarouselHolder')[0].offsetHeight / 768).toFixed(2);
+  var slideCarouselWidth = 1024 * slideCarouselScale;
   var size = fitSlideToParent(document.getElementById('slideContainer'));
-  addCSSRules(['.slideMain {\
+  addCSSRules(uiStyle, ['.slideCarouselHolder {\
+                  width:' + slideCarouselWidth + 'px;\
+                }',
+                '.slideCarousel {\
+                  transform: scale(' + slideCarouselScale + ');\
+                  -webkit-transform: scale(' + slideCarouselScale + ');\
+                }',
+                '.slideMainHolder {\
                   width:' + size.width + 'px; \
                   height:' + size.height + 'px; \
                   top:' + size.top + 'px; \
                   left:' + size.left + 'px \
-                  }']);
+                }',
+                '.slideMain {\
+                  transform: scale('+ size.scale + '); \
+                  -webkit-transform: scale('+ size.scale + '); \
+                }']);
   setConfigUI();
 }
 
@@ -31,7 +47,6 @@ function loadSlide() {
     var divMain = createSlideDiv(json[i], 'slideMain');
     divMain.id = i;
     divMain.style.display = (i == 0) ? 'block' : 'none';
-    divMain.style.transform = 'scale(1)';
     var divCarousel = createSlideDiv(json[i], 'slideCarousel');
     var divCarouselCover = document.createElement('div');
     divCarouselCover.style.position = 'absolute';
@@ -74,18 +89,24 @@ function toggleCarousel(e) {
 }
 
 function switchToSlide(e) {
-  var allSlide = document.getElementsByClassName('slideMain');
+  var allSlide = document.getElementsByClassName('slideMainHolder');
   for (var i = 0; i < allSlide.length; i++) {
     allSlide[i].style.display = (i == this.id) ? 'block' : 'none';
   }
   scrollToSlide(this.id);
 }
 
-function addCSSRules(rules) {
-  var styleNew = document.createElement('style');
-  document.head.appendChild(styleNew);
+function addCSSRules(CSS, rules) {
+  removeAllRules(CSS);
   for (var i = 0; i < rules.length; i++) {
-    styleNew.sheet.insertRule(rules[i], styleNew.sheet.cssRules.length);
+    console.log(CSS.sheet.cssRules.length);
+    CSS.sheet.insertRule(rules[i], CSS.sheet.cssRules.length);
+  }
+}
+
+function removeAllRules(CSS) {
+  for (var i = 0; i < CSS.sheet.cssRules.length; i++) {
+    CSS.sheet.deleteRule(i);
   }
 }
 
@@ -95,21 +116,23 @@ function fitSlideToParent(parent) {
       height: parent.offsetWidth*3/4,
       width: parent.offsetWidth,
       top: 0.5*(parent.offsetHeight - parent.offsetWidth*3/4),
-      left: 0
+      left: 0,
+      scale: parent.offsetWidth/1024
     }
   } else {
     return {
       height: parent.offsetHeight,
       width: parent.offsetHeight*4/3,
       top: 0,
-      left: 0.5*(parent.offsetWidth - parent.offsetHeight*4/3)
+      left: 0.5*(parent.offsetWidth - parent.offsetHeight*4/3),
+      scale: parent.offsetHeight/768
     }
   }
 }
 
 function scrollToSlide(id) {
   var carousel = document.getElementById('carousel');
-  var allSlideCarousel = document.getElementsByClassName('slideCarousel');
+  var allSlideCarousel = document.getElementsByClassName('slideCarouselHolder');
   var slideMargin = parseFloat(window.getComputedStyle(allSlideCarousel[id]).marginLeft);
   carousel.scrollLeft = allSlideCarousel[id].offsetLeft - slideMargin;
   for (var i = 0; i < allSlideCarousel.length; i++) {

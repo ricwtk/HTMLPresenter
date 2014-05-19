@@ -11,10 +11,15 @@ function getJSON(theUrl) {
 }
 
 function createSlideDiv(json, divLoc) {
+  var divHolder = document.createElement('div');
+  divHolder.id = json.id;
+  divHolder.className = divLoc + 'Holder';
   var div = document.createElement('div');
-  div.id = json.id;
   div.className = divLoc;
   div.style.background = (json.background == '') ? 'rgb(255,255,255)' : json.background;
+  div.style.width = '1024px';
+  div.style.height = '768px';
+  
   var header = document.createElement('div');
   header.className = 'header';
   header.innerHTML = json.header;
@@ -29,7 +34,8 @@ function createSlideDiv(json, divLoc) {
   div.appendChild(content);
   div.appendChild(footer);
   
-  return div;
+  divHolder.appendChild(div);
+  return divHolder;
 }
 
 function createConfig() {
