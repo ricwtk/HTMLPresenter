@@ -12,13 +12,12 @@ function initialise() {
   document.getElementById('next').addEventListener('click', function(e) {goToSlide(+1);});
   loadSlide();
   setUIpos();
-  setUIpos();
 }
 
 function setUIpos() {
   document.getElementById('toggleCar').style.fontSize = document.getElementById('toggleCar').offsetHeight*0.7 + 'px';
   document.getElementById('config').style.fontSize = document.getElementById('config').offsetHeight*0.7 + 'px';
-  var slideCarouselScale = (document.getElementsByClassName('slideCarouselHolder')[0].offsetHeight / 768).toFixed(2);
+  var slideCarouselScale = (document.getElementsByClassName('slideCarouselHolder')[0].offsetHeight / 768);
   var slideCarouselWidth = 1024 * slideCarouselScale;
   var size = fitSlideToParent(document.getElementById('slideContainer'));
   addCSSRules(uiStyle, ['.slideCarouselHolder {\
