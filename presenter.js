@@ -64,7 +64,7 @@ function loadSlide() {
 }
 
 function goToSlide(inc) {
-  var allSlide = document.getElementsByClassName('slideMain');
+  var allSlide = document.getElementsByClassName('slideMainHolder');
   for (var i = 0; i < allSlide.length; i++) {
     if (allSlide[i].style.display !== 'none') {
       allSlide[i].style.display = 'none';
@@ -98,7 +98,6 @@ function switchToSlide(e) {
 function addCSSRules(CSS, rules) {
   removeAllRules(CSS);
   for (var i = 0; i < rules.length; i++) {
-    console.log(CSS.sheet.cssRules.length);
     CSS.sheet.insertRule(rules[i], CSS.sheet.cssRules.length);
   }
 }
