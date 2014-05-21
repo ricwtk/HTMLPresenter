@@ -67,7 +67,7 @@ function createConfig() {
   configBox.appendChild(configText);
   configBox.innerHTML += 'File: ';
   var filelist = document.createElement('input');
-  filelist.id = 'FiletoOpen';
+  filelist.id = 'fileToOpen';
   filelist.type = 'file';
   filelist.style.fontSize = 'inherit';
   configBox.appendChild(filelist);
@@ -88,7 +88,7 @@ function createConfig() {
   configBox.appendChild(empty);
   var setBtn = cancelBtn.cloneNode(true);
   setBtn.innerHTML = 'Set';
-  setBtn.addEventListener('click', function(e) {});
+  setBtn.addEventListener('click', setConfig);
   configBox.appendChild(setBtn);
   div.appendChild(configBox);
   document.body.appendChild(div);

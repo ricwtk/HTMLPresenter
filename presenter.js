@@ -10,38 +10,40 @@ function initialise() {
   document.getElementById('toggleCar').addEventListener('click', toggleCarousel);
   document.getElementById('prev').addEventListener('click', function(e) {goToSlide(-1);});
   document.getElementById('next').addEventListener('click', function(e) {goToSlide(+1);});
-  loadSlide();
+  //loadSlide();
   setUIpos();
 }
 
 function setUIpos() {
   document.getElementById('toggleCar').style.fontSize = document.getElementById('toggleCar').offsetHeight*0.7 + 'px';
   document.getElementById('config').style.fontSize = document.getElementById('config').offsetHeight*0.7 + 'px';
-  var slideCarouselScale = (document.getElementsByClassName('slideCarouselHolder')[0].offsetHeight / 768);
-  var slideCarouselWidth = 1024 * slideCarouselScale;
-  var size = fitSlideToParent(document.getElementById('slideContainer'));
-  addCSSRules(uiStyle, ['.slideCarouselHolder {\
-                  width:' + slideCarouselWidth + 'px;\
-                }',
-                '.slideCarousel {\
-                  transform: scale(' + slideCarouselScale + ');\
-                  -webkit-transform: scale(' + slideCarouselScale + ');\
-                }',
-                '.slideMainHolder {\
-                  width:' + size.width + 'px; \
-                  height:' + size.height + 'px; \
-                  top:' + size.top + 'px; \
-                  left:' + size.left + 'px \
-                }',
-                '.slideMain {\
-                  transform: scale('+ size.scale + '); \
-                  -webkit-transform: scale('+ size.scale + '); \
-                }']);
   setConfigUI();
+  if (typeof document.getElementsByClassName('slideCarouselHolder')[0] !== 'undefined') {
+    var slideCarouselScale = (document.getElementsByClassName('slideCarouselHolder')[0].offsetHeight / 768);
+    var slideCarouselWidth = 1024 * slideCarouselScale;
+    var size = fitSlideToParent(document.getElementById('slideContainer'));
+    addCSSRules(uiStyle, ['.slideCarouselHolder {\
+                    width:' + slideCarouselWidth + 'px;\
+                  }',
+                  '.slideCarousel {\
+                    transform: scale(' + slideCarouselScale + ');\
+                    -webkit-transform: scale(' + slideCarouselScale + ');\
+                  }',
+                  '.slideMainHolder {\
+                    width:' + size.width + 'px; \
+                    height:' + size.height + 'px; \
+                    top:' + size.top + 'px; \
+                    left:' + size.left + 'px \
+                  }',
+                  '.slideMain {\
+                    transform: scale('+ size.scale + '); \
+                    -webkit-transform: scale('+ size.scale + '); \
+                  }']);
+  }
 }
 
-function loadSlide() {
-  var json = getJSON('./doc1.json');
+function loadSlide(json) {
+  //var json = getJSON('./doc1.json');
   for (var i = 0; i < json.length; i++) {
     var divMain = createSlideDiv(json[i], 'slideMain');
     divMain.id = i;
@@ -136,4 +138,14 @@ function scrollToSlide(id) {
   for (var i = 0; i < allSlideCarousel.length; i++) {
     allSlideCarousel[i].style.boxShadow = (i == id) ? slideShadow(1) : slideShadow(0);
   }
+}
+
+function setConfig(e) {
+  var fileInput = document.getElementById('fileToOpen');
+  var fileReader = new FileReader();
+  fileReader.onload = function(e) {
+    loadSlide(JSON.parse(e.target.result));
+    setUIpos();
+    document.getElementById('configContainer').style.display = 'none';};
+  fileReader.readAsText(fileInput.files[0]);
 }
