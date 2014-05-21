@@ -35,6 +35,7 @@ function createSlideDiv(json, divLoc) {
   div.appendChild(footer);
   
   divHolder.appendChild(div);
+  divHolder.title = json.header;
   return divHolder;
 }
 

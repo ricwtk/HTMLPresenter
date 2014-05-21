@@ -59,7 +59,6 @@ function loadSlide(json) {
     divCarousel.appendChild(divCarouselCover);
     divCarousel.style.boxShadow = (i == 0) ? slideShadow(1) : slideShadow(0);
     divCarousel.id = i;
-    divCarousel.title = 'Slide '+i;
     divCarousel.addEventListener('click', switchToSlide);
     document.getElementById('slideContainer').appendChild(divMain);
     document.getElementById('carousel').appendChild(divCarousel);
