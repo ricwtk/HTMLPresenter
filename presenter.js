@@ -44,6 +44,8 @@ function setUIpos() {
 
 function loadSlide(json) {
   //var json = getJSON('./doc1.json');
+  document.getElementById('slideContainer').innerHTML = '';
+  document.getElementById('carousel').innerHTML = '';
   for (var i = 0; i < json.length; i++) {
     var divMain = createSlideDiv(json[i], 'slideMain');
     divMain.id = i;
